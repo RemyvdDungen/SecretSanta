@@ -3,10 +3,14 @@
 
 :root {
   --accent: #e63946;
-  --bg: #0b0f17;      /* fallback achtergrondkleur */
+  --bg: #0b0f17;                 /* fallback achtergrondkleur */
   --text: #f5f7fa;
   --muted: rgba(255,255,255,0.85);
   --border: rgba(255,255,255,0.08);
+
+  /* Hoogtecompensatie voor vaste header (alleen voor subpagina-hero tekst) */
+  --hero-offset-mobile: 88px;
+  --hero-offset-desktop: 110px;
 }
 
 html, body { height: 100%; }
@@ -23,21 +27,19 @@ body {
   position: fixed;
   top: 0; left: 0;
   z-index: 50;
-  background: transparent;          /* geen donker vlak */
+  background: transparent;        /* geen donker vlak */
   backdrop-filter: none;
   border-bottom: 1px solid var(--border);
 }
-
 .nav {
   max-width: 1100px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: flex-start;      /* links uitlijnen */
+  justify-content: flex-start;    /* links uitlijnen */
   gap: 24px;
   padding: 14px 18px;
 }
-
 .nav a {
   color: var(--text);
   text-decoration: none;
@@ -47,26 +49,20 @@ body {
 .nav a:hover { opacity: 1; text-decoration: underline; }
 
 /* ============ HERO (VIDEO) ============ */
+/* Home-hero: full screen */
 .hero {
   position: relative;
-  min-height: 100vh;                 /* homepage-hero */
+  min-height: 100vh;
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 0 18px;
+  padding: 0 18px;               /* géén top-padding; video moet exact als home staan */
 }
-
-/* Subpagina: lagere hero + ruimte t.o.v. fixed header */
+/* Subpagina-hero: zelfde framing als home; alleen tekst schuift omlaag */
 .hero--sub {
-  min-height: 50vh;
-  text-align: center;
-  padding: 96px 16px 24px;          /* ruimte boven zodat kop niet plakt */
+  min-height: 100vh;
+  padding: 0;                    /* belangrijk: geen padding op de hero zelf */
 }
-@media (min-width: 768px) {
-  .hero--sub { padding-top: 120px; }
-}
-
-/* Video-achtergrond */
 .video-bg {
   position: absolute;
   inset: 0;
@@ -79,29 +75,33 @@ body {
   object-fit: cover;
   filter: saturate(1.05) contrast(1.05) brightness(0.95);
 }
+/* Overlay uit (bewust transparant) */
+.video-overlay { display: none; background: transparent; }
 
-/* Overlay UIT (expliciet) */
-.video-overlay { display: none !important; background: transparent !important; }
-
-/* Koppen in hero */
+/* Hero-typografie */
 .hero h1 {
   font-size: clamp(28px, 4.5vw, 54px);
   letter-spacing: 0.4px;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
   text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
-
-/* Sierlijk lettertype voor slogan / koppen waar gewenst */
+/* Sierlijk lettertype optioneel voor koppen */
 .siertekst {
   font-family: "Arima Madurai", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   text-shadow: 0 1px 12px rgba(0,0,0,0.35);
-  margin-top: 6px;
 }
+/* Intro-regeltje onder H1 */
+.intro { margin-top: 6px; color: var(--muted); }
 
-/* Klein intro-regeltje onder h1 (optioneel) */
-.intro { margin-top: 8px; color: var(--muted); }
+/* Subpagina: schuif alléén het tekstblok omlaag i.v.m. de vaste header */
+.hero--sub .copy-block {
+  margin-top: var(--hero-offset-mobile);
+}
+@media (min-width: 768px) {
+  .hero--sub .copy-block { margin-top: var(--hero-offset-desktop); }
+}
 
 /* ============ CONTENT BLOKKEN ============ */
 .section {
@@ -109,23 +109,22 @@ body {
   max-width: 1100px;
   margin: 0 auto;
 }
+.content { display: grid; gap: 24px; }
 
-.content { /* generieke content wrapper */
-  display: grid;
-  gap: 24px;
-}
-
-/* Transparante copyblokken (geen donker vlak) */
+/* Transparante tekstblokken (geen donkere panelen) */
 .copy-block {
   max-width: 900px;
   margin: 12px auto 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
+  background: transparent;
+  box-shadow: none;
+  border: none;
   padding: 0.5rem 0;
   color: var(--muted);
   font-size: clamp(16px, 2.5vw, 18px);
 }
+
+/* FAQ: zorg voor vaste buffer tussen hero en FAQ-content */
+.faq-content { margin-top: 56px; }
 
 /* ============ FAQ (details/summary) ============ */
 details {
@@ -134,26 +133,18 @@ details {
   border-radius: 12px;
   padding: 14px 16px;
 }
-
 details + details { margin-top: 10px; }
-
 summary {
   cursor: pointer;
   font-weight: 600;
   color: var(--text);
-  list-style: none; /* verberg driehoekje in sommige browsers */
+  list-style: none;              /* verberg marker in sommige browsers */
 }
 summary::-webkit-details-marker { display: none; }
+details[open] { background: rgba(0,0,0,0.28); }
+details p { margin-top: 10px; color: var(--muted); }
 
-details[open] {
-  background: rgba(0,0,0,0.28);
-}
-details p {
-  margin-top: 10px;
-  color: var(--muted);
-}
-
-/* ============ LINKS / BUTTONS / FOCUS ============ */
+/* ============ LINKS / FOCUS ============ */
 a { color: var(--text); }
 a:focus-visible, button:focus-visible {
   outline: 3px solid #fff;
@@ -171,8 +162,7 @@ a:focus-visible, button:focus-visible {
   margin-top: 32px;
 }
 
-/* ============ OPTIONAL: PULSE (alleen op home gebruiken) ============ */
-/* Laat staan als je het logo-knopje ooit weer inzet */
+/* ============ OPTIONEEL: PULSE-KNOP (alleen home) ============ */
 .pulse-wrap {
   margin: 24px auto 12px;
   display: grid;
@@ -212,84 +202,3 @@ a:focus-visible, button:focus-visible {
   70% { transform: scale(1.2); opacity: 0; }
   100% { opacity: 0; }
 }
-
-
-/* ==== FAQ/over-ons hero en spacing fix ==== */
-
-/* hero op subpagina's: hoger + extra ruimte onder vaste header */
-.hero.hero--sub {
-  min-height: 68vh !important;              /* was 50vh */
-  padding-top: calc(88px + 4vh) !important; /* extra ruimte onder header */
-  padding-bottom: 28px !important;
-}
-
-/* desktop iets royaler */
-@media (min-width: 768px) {
-  .hero.hero--sub {
-    min-height: 72vh !important;
-    padding-top: calc(110px + 4vh) !important;
-  }
-}
-
-/* tekstblok in hero niet extra opschuiven */
-.hero.hero--sub .copy-block {
-  margin-top: 0 !important;
-  padding: 0 !important;
-}
-
-/* titel in hero compact houden */
-.hero.hero--sub h1 { margin-bottom: 10px !important; }
-
-/* zorg dat de content niet tegen de video staat */
-.hero.hero--sub + .section {
-  margin-top: 24px !important;
-}
-
-/* video moet altijd volledig vullen */
-.video-bg, .video-bg video {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-
-/* ===== SUBPAGE HERO ROBUST FIX (FAQ & Over-ons) ===== */
-
-/* hoogte + ruimte i.v.m. vaste header */
-.hero.hero--sub{
-  display: grid !important;
-  place-items: center !important;
-  min-height: 72vh !important;                 /* royale hoogte voor de video */
-  padding-top: calc(110px + 2vh) !important;   /* ruimte onder de header */
-  padding-bottom: 28px !important;
-}
-
-/* video echt fullscreen binnen de hero */
-.hero.hero--sub .video-bg,
-.hero.hero--sub .video-bg video{
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-
-/* tekstblok netjes gecentreerd boven de video */
-.hero.hero--sub .copy-block{
-  margin: 0 auto !important;
-  padding: 0 !important;
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* titel/intro compact */
-.hero.hero--sub h1{ margin-bottom: 10px !important; }
-
-/* zorg voor buffer tussen hero en content – ook als ergens anders iets eroverheen schrijft */
-.hero.hero--sub + .section,
-.faq-content{
-  margin-top: 28px !important;
-}
-
-/* extra vangnet: FAQ-content nooit onder de hero */
-.faq-content{ position: relative; z-index: 0; }
-
-/* overlay blijft uit */
-.video-overlay{ display: none !important; background: transparent !important; }
