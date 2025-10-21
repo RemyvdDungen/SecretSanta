@@ -167,7 +167,7 @@ a:focus-visible, button:focus-visible {
   margin: 24px auto 12px;
   display: grid;
   place-items: center;
-  transform: translateY(80px);
+  transform: translateY(100px);
 }
 .pulse-button {
   width: clamp(140px, 28vw, 240px);
