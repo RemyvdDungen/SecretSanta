@@ -212,3 +212,42 @@ a:focus-visible, button:focus-visible {
   70% { transform: scale(1.2); opacity: 0; }
   100% { opacity: 0; }
 }
+
+
+/* ==== FAQ/over-ons hero en spacing fix ==== */
+
+/* hero op subpagina's: hoger + extra ruimte onder vaste header */
+.hero.hero--sub {
+  min-height: 68vh !important;              /* was 50vh */
+  padding-top: calc(88px + 4vh) !important; /* extra ruimte onder header */
+  padding-bottom: 28px !important;
+}
+
+/* desktop iets royaler */
+@media (min-width: 768px) {
+  .hero.hero--sub {
+    min-height: 72vh !important;
+    padding-top: calc(110px + 4vh) !important;
+  }
+}
+
+/* tekstblok in hero niet extra opschuiven */
+.hero.hero--sub .copy-block {
+  margin-top: 0 !important;
+  padding: 0 !important;
+}
+
+/* titel in hero compact houden */
+.hero.hero--sub h1 { margin-bottom: 10px !important; }
+
+/* zorg dat de content niet tegen de video staat */
+.hero.hero--sub + .section {
+  margin-top: 24px !important;
+}
+
+/* video moet altijd volledig vullen */
+.video-bg, .video-bg video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
