@@ -209,3 +209,15 @@ a:focus-visible, button:focus-visible {
   70% { transform: scale(1.2); opacity: 0; }
   100% { opacity: 0; }
 }
+
+/* === MOBILE OVERRIDE: moet als laatste in het bestand staan === */
+@media screen and (max-width: 767px) {
+  .pulse-wrap {
+    transform: translateY(200px) !important; /* forceer mobiel lager */
+  }
+
+  /* optioneel: iets kleiner op mobiel */
+  .pulse-button {
+    width: clamp(120px, 42vw, 200px);
+  }
+}
