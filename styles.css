@@ -154,3 +154,22 @@ a:focus-visible, button:focus-visible {
   outline: 3px solid #fff;
   outline-offset: 3px;
 }
+/* Subpagina hero-afstand t.o.v. fixed header */
+.hero--sub {
+  min-height: 50vh;
+  text-align: center;
+  padding: 96px 16px 24px; /* ruimte boven zodat je net moet scrollen */
+}
+@media (min-width: 768px) {
+  .hero--sub { padding-top: 120px; }
+}
+
+/* Intro-regeltje onder de h1 */
+.intro { margin-top: 8px; }
+
+/* Als .siertekst nog niet bestaat, laat dan dit staan; anders negeren */
+.siertekst {
+  font-family: "Arima Madurai", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.35);

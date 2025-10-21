@@ -1,59 +1,60 @@
 <!doctype html>
 <html lang="nl">
 <head>
-
-<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Secret Santa Kolhorn — Over ons</title> <!-- pas titel per pagina -->
-  <meta name="description" content="Secret Santa Kolhorn — Over ons">
+  <title>Veelgestelde vragen – Secret Santa Kolhorn</title>
+  <meta name="description" content="Antwoorden op veelgestelde vragen over Secret Santa Kolhorn.">
   <link rel="preload" as="video" href="assets/background.mp4" type="video/mp4">
+  <!-- Sierlijk lettertype -->
+  <link href="https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <<header class="header" role="banner">
-  <nav class="nav" aria-label="Hoofdmenu">
-    <div class="nav-links">
-      <a href="index.html">Secret Santa</a>
-      <a href="over-ons.html" aria-current="page">Over ons</a>
-      <a href="faq.html">Veelgestelde vragen</a>
-    </div>
-  </nav>
-</header>
+  <header class="header" role="banner">
+    <nav class="nav" aria-label="Hoofdmenu">
+      <div class="nav-links">
+        <a href="index.html">Secret Santa</a>
+        <a href="over-ons.html">Over ons</a>
+        <a href="faq.html" aria-current="page">Veelgestelde vragen</a>
+      </div>
+    </nav>
+  </header>
 
-  <section class="hero" aria-label="FAQ">
-    <div class="video-bg" aria-hidden="true">
-      <video src="assets/background.mp4" autoplay loop muted playsinline></video>
-    </div>
-    <div class="video-overlay" aria-hidden="true"></div>
+  <main>
+    <!-- HERO met video-achtergrond (geen pulse-knop) -->
+    <section class="hero hero--sub" aria-label="FAQ">
+      <div class="video-bg" aria-hidden="true">
+        <video src="assets/background.mp4" autoplay loop muted playsinline></video>
+      </div>
+      <div class="video-overlay" aria-hidden="true"></div>
 
-    
-    <div class="copy-block">
-      <h1 class="siertekst">
-      <p>Heb je vragen? Scroll rustig naar beneden voor veelgestelde vragen.</p>
-    </h1>
-    </div>
-  </section>
+      <h1 class="siertekst">Veelgestelde vragen</h1>
+      <p class="intro">Heb je vragen? Scroll rustig naar beneden voor de antwoorden.</p>
+    </section>
 
-  <main class="section">
-    <h1>Veelgestelde vragen</h1>
-    <details>
-      <summary>Hoe kan ik iemand nomineren?</summary>
-      <p>Gebruik de knipperende ronde knop op de homepage, of ga rechtstreeks naar de aanmeldpagina van Stichting Evenementen Kolhorn.</p>
-    </details>
-    <details>
-      <summary>Wie kan ik nomineren?</summary>
-      <p>Iemand die volgens jou een lichtpuntje verdient omdat diegene iets goeds doet voor anderen.</p>
-    </details>
-    <details>
-      <summary>Wat gebeurt er na mijn nominatie?</summary>
-      <p>De nominaties worden opgepakt door de organisatie. Je ontvangt bericht als jouw inzending geselecteerd is.</p>
-    </details>
+    <!-- Inhoud -->
+    <section class="section content">
+      <details>
+        <summary>Hoe kan ik iemand nomineren?</summary>
+        <p>Gebruik de ronde knop op de homepage of ga naar de aanmeldpagina van Stichting Evenementen Kolhorn.</p>
+      </details>
+
+      <details>
+        <summary>Wie kan ik nomineren?</summary>
+        <p>Iemand die volgens jou een lichtpuntje verdient omdat diegene iets goeds doet voor anderen.</p>
+      </details>
+
+      <details>
+        <summary>Wat gebeurt er na mijn nominatie?</summary>
+        <p>De organisatie beoordeelt de inzendingen. Je krijgt bericht als jouw nominatie is geselecteerd.</p>
+      </details>
+    </section>
   </main>
 
   <footer class="footer">
-    Mogelijk gemaakt door Stichting Evenementen Kolhorn.
+    Mogelijk gemaakt door Stichting Evenementen Kolhorn. © 2025
   </footer>
 </body>
 </html>
