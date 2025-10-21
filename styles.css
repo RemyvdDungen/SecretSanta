@@ -171,7 +171,7 @@ a:focus-visible, button:focus-visible {
 
 @media (max-width: 767px) {
   .pulse-wrap {
-    transform: translateY(120px); /* iets lager op mobiel */
+    transform: translateY(150px); /* iets lager op mobiel */
   }
 }
 
