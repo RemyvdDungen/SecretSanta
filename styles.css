@@ -213,7 +213,7 @@ a:focus-visible, button:focus-visible {
 /* === MOBILE OVERRIDE: moet als laatste in het bestand staan === */
 @media screen and (max-width: 767px) {
   .pulse-wrap {
-    transform: translateY(200px) !important; /* forceer mobiel lager */
+    transform: translateY(150px) !important; /* forceer mobiel lager */
   }
 
   /* optioneel: iets kleiner op mobiel */
