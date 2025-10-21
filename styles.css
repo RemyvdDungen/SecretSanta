@@ -168,6 +168,13 @@ a:focus-visible, button:focus-visible {
   display: grid;
   place-items: center;
   transform: translateY(100px);
+
+@media (max-width: 767px) {
+  .pulse-wrap {
+    transform: translateY(120px); /* iets lager op mobiel */
+  }
+}
+
 }
 .pulse-button {
   width: clamp(140px, 28vw, 240px);
