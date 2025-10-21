@@ -251,3 +251,45 @@ a:focus-visible, button:focus-visible {
   height: 100% !important;
   object-fit: cover !important;
 }
+
+/* ===== SUBPAGE HERO ROBUST FIX (FAQ & Over-ons) ===== */
+
+/* hoogte + ruimte i.v.m. vaste header */
+.hero.hero--sub{
+  display: grid !important;
+  place-items: center !important;
+  min-height: 72vh !important;                 /* royale hoogte voor de video */
+  padding-top: calc(110px + 2vh) !important;   /* ruimte onder de header */
+  padding-bottom: 28px !important;
+}
+
+/* video echt fullscreen binnen de hero */
+.hero.hero--sub .video-bg,
+.hero.hero--sub .video-bg video{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* tekstblok netjes gecentreerd boven de video */
+.hero.hero--sub .copy-block{
+  margin: 0 auto !important;
+  padding: 0 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* titel/intro compact */
+.hero.hero--sub h1{ margin-bottom: 10px !important; }
+
+/* zorg voor buffer tussen hero en content – ook als ergens anders iets eroverheen schrijft */
+.hero.hero--sub + .section,
+.faq-content{
+  margin-top: 28px !important;
+}
+
+/* extra vangnet: FAQ-content nooit onder de hero */
+.faq-content{ position: relative; z-index: 0; }
+
+/* overlay blijft uit */
+.video-overlay{ display: none !important; background: transparent !important; }
