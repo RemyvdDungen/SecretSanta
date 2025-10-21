@@ -1,12 +1,12 @@
-
-/* Basic reset */
+/* ============ RESET & THEMA ============ */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root{
+:root {
   --accent: #e63946;
-  --bg: #0b0f17;
+  --bg: #0b0f17;      /* fallback achtergrondkleur */
   --text: #f5f7fa;
-  --muted: rgba(255,255,255,0.8);
+  --muted: rgba(255,255,255,0.85);
+  --border: rgba(255,255,255,0.08);
 }
 
 html, body { height: 100%; }
@@ -17,36 +17,56 @@ body {
   line-height: 1.6;
 }
 
-/* Header / nav */
+/* ============ HEADER / NAV ============ */
 .header {
   width: 100%;
   position: fixed;
   top: 0; left: 0;
-  z-index: 5;
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 50;
+  background: transparent;          /* geen donker vlak */
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--border);
 }
+
 .nav {
-  max-width: 1100px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;      /* links uitlijnen */
+  gap: 24px;
   padding: 14px 18px;
 }
-.nav a {
-  color: var(--text); text-decoration: none; margin-left: 16px;
-  font-weight: 600;
-}
-.nav a:hover { text-decoration: underline; }
 
-/* Hero video background */
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.nav a:hover { opacity: 1; text-decoration: underline; }
+
+/* ============ HERO (VIDEO) ============ */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100vh;                 /* homepage-hero */
   display: grid;
   place-items: center;
   text-align: center;
   padding: 0 18px;
 }
+
+/* Subpagina: lagere hero + ruimte t.o.v. fixed header */
+.hero--sub {
+  min-height: 50vh;
+  text-align: center;
+  padding: 96px 16px 24px;          /* ruimte boven zodat kop niet plakt */
+}
+@media (min-width: 768px) {
+  .hero--sub { padding-top: 120px; }
+}
+
+/* Video-achtergrond */
 .video-bg {
   position: absolute;
   inset: 0;
@@ -57,40 +77,102 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(1.1) contrast(1.05) brightness(0.95);
-}
-.video-overlay {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 70%, rgba(0,0,0,0.9) 100%);
-  z-index: -1;
+  filter: saturate(1.05) contrast(1.05) brightness(0.95);
 }
 
-/* Sierlijk lettertype voor de slogan */
+/* Overlay UIT (expliciet) */
+.video-overlay { display: none !important; background: transparent !important; }
+
+/* Koppen in hero */
+.hero h1 {
+  font-size: clamp(28px, 4.5vw, 54px);
+  letter-spacing: 0.4px;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+}
+
+/* Sierlijk lettertype voor slogan / koppen waar gewenst */
 .siertekst {
   font-family: "Arima Madurai", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   text-shadow: 0 1px 12px rgba(0,0,0,0.35);
-  margin-top: 24px;
+  margin-top: 6px;
 }
 
-.hero h1 {
-  font-size: clamp(28px, 4.5vw, 54px);
-  letter-spacing: 0.5px;
-  margin-bottom: 22px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+/* Klein intro-regeltje onder h1 (optioneel) */
+.intro { margin-top: 8px; color: var(--muted); }
+
+/* ============ CONTENT BLOKKEN ============ */
+.section {
+  padding: 64px 18px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+.content { /* generieke content wrapper */
+  display: grid;
+  gap: 24px;
+}
+
+/* Transparante copyblokken (geen donker vlak) */
 .copy-block {
   max-width: 900px;
-  border-radius: 16px;
-  padding: 20px 22px;
-  margin: 18px auto 0;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  margin: 12px auto 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0.5rem 0;
+  color: var(--muted);
   font-size: clamp(16px, 2.5vw, 18px);
 }
 
-/* Pulsing round logo button */
+/* ============ FAQ (details/summary) ============ */
+details {
+  background: rgba(0,0,0,0.22);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+details + details { margin-top: 10px; }
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  list-style: none; /* verberg driehoekje in sommige browsers */
+}
+summary::-webkit-details-marker { display: none; }
+
+details[open] {
+  background: rgba(0,0,0,0.28);
+}
+details p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* ============ LINKS / BUTTONS / FOCUS ============ */
+a { color: var(--text); }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* ============ FOOTER ============ */
+.footer {
+  text-align: center;
+  padding: 28px 18px;
+  color: #cfd6df;
+  font-size: 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(0,0,0,0.25);
+  margin-top: 32px;
+}
+
+/* ============ OPTIONAL: PULSE (alleen op home gebruiken) ============ */
+/* Laat staan als je het logo-knopje ooit weer inzet */
 .pulse-wrap {
   margin: 24px auto 12px;
   display: grid;
@@ -116,7 +198,6 @@ body {
   display: block;
   box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 }
-/* ring pulse */
 .pulse-button::after, .pulse-button::before {
   content: "";
   position: absolute;
@@ -126,50 +207,8 @@ body {
   animation: pulse 1.8s ease-out infinite;
 }
 .pulse-button::before { animation-delay: .9s; }
-
 @keyframes pulse {
   0% { transform: scale(0.95); opacity: 0.9; }
   70% { transform: scale(1.2); opacity: 0; }
   100% { opacity: 0; }
 }
-
-/* Section defaults */
-.section {
-  padding: 64px 18px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.footer {
-  text-align: center;
-  padding: 28px 18px;
-  color: #cfd6df;
-  font-size: 14px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  background: rgba(0,0,0,0.3);
-}
-
-/* A11y focus */
-a:focus-visible, button:focus-visible {
-  outline: 3px solid #fff;
-  outline-offset: 3px;
-}
-/* Subpagina hero-afstand t.o.v. fixed header */
-.hero--sub {
-  min-height: 50vh;
-  text-align: center;
-  padding: 96px 16px 24px; /* ruimte boven zodat je net moet scrollen */
-}
-@media (min-width: 768px) {
-  .hero--sub { padding-top: 120px; }
-}
-
-/* Intro-regeltje onder de h1 */
-.intro { margin-top: 8px; }
-
-/* Als .siertekst nog niet bestaat, laat dan dit staan; anders negeren */
-.siertekst {
-  font-family: "Arima Madurai", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  font-weight: 700;
-  line-height: 1.2;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.35);
